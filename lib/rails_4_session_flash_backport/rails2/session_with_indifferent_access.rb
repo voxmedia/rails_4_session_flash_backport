@@ -11,17 +11,17 @@ module ActionController::Session
   class AbstractStore
     class SessionHash < Hash
         def [](key)
-          load! unless @loaded
+          load_for_read!
           super(key.to_s) || super(key)
         end
 
         def has_key?(key)
-          load! unless @loaded
+          load_for_read!
           super(key.to_s) || super(key)
         end
 
         def []=(key, value)
-          load! unless @loaded
+          load_for_write!
           super(key.to_s, value)
         end
     end
